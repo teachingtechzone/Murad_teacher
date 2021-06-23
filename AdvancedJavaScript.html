@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+// **************************************** 1. use of var , let and const ****************************************
+// // problem
+// function looping() {
+
+//     for (var i = 0; i < 6; i++) { // i should be exist in this block scope
+//         console.log(i)
+//     }
+    
+//     // console.log(i)
+// }
+
+// // console.log(i) // it should behave like this
+
+// looping();
+// // var -> function scope
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // solution es6-2015
+// function looping() {
+
+//     for (let i = 0; i < 6; i++) { // i should be exist in this block scope
+//         console.log(i)
+//     }
+    
+//     // console.log(i) // will throw error
+// }
+
+// // console.log(i) // Obvisly it won't
+// // let -> block scope
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const -> block
+
+// const x = 1 ;
+// console.log(x)
+
+// // x = 2; // throw error
+
+// // but 
+// let b = 5;
+// b = 6;
+// console.log(b)
+
+
+// // so , don't use var for best practice
+
+
+// **************************************** 1. use of var , let and const ended ****************************************
+
+
+
+
+
+
+// **************************************** 2. use of this keyword ****************************************
+
+// // Objects key value pair
+
+
+// accessing objects property and function
+// const person = {
+//     name : "Ali",
+//     talk() {
+//         return "can talk";
+//     }
+// }
+
+// console.log(person.name)
+// person.name = "ahsan";
+// console.log(person.name)
+// console.log(person["name"])
+// console.log(person.talk())
+// console.log(person["talk()"]) // dont access method like this
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // this
+
+
+// const person = {
+//     name : "Ali",
+//     talk() {
+//        console.log(this) ;  // return refrence of current object
+//     }
+// }
+
+// person.talk(); // calling method directly is returning the object i.e. name and function which fine
+
+
+// // now see the behavir
+
+// const talk1 = person.talk; // reference to the function not called it
+// console.log(talk1)
+// talk1(); // where we get window object as this point to window object
+// console.log(this) // result same as above
+
+// // if call function as method on object it will return refrence to that object
+// // now if we call function as standalone or outside object this will return global object , the window object
+
+
+
+
+
+
+
+
+
+
+
+// // Solution
+// // not that every function in javaScript object is also an object
+
+
+// const person = {
+//     name : "Ali",
+//     talk() {
+//        console.log(this) ;  // return refrence of current object
+//     }
+// }
+
+// // type dot to see all members and methods
+// // person.talk.
+
+// // now use bind method to solve this problem
+// const talk2 = person.talk.bind(person) // :)
+
+// talk2()
+
+
+
+// **************************************** 2. use of this keyword ended ****************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// **************************************** 3. use of arrow function ****************************************
+// // Arrow function
+
+// const square = function(number) {
+//     return number * number;
+// }
+
+// console.log(square) // refrence to the function
+// console.log(square(5)) // call the function
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // 1- function
+// // 2- => // fat arrow
+// const square = (number) =>  {
+//     return number * number;
+// }
+// console.log(square(5))
+
+
+// // // if have only single parameter exclude paranthesis
+// const square = number =>  {
+//     return number * number;
+// }
+
+
+// console.log(square(5))
+
+
+// // // if body have single line then exclude
+// // 1- curly braces 
+// // 2- retrun 
+// const square = number =>  number * number;
+
+// console.log(square(2))
+
+// // now see difference
+// const square = function(number) {
+//     return number * number;
+// }
+
+// // // if have zero parameter then empty paranthesis
+// const square = () =>  {
+//     return 255 ;
+// }
+
+
+// console.log(square())
+
+
+
+
+// **************************************** 3. use of arrow function ended ****************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// **************************************** 4. use of map ****************************************
+
+
+// // using of map since es5
+// let colors = ["red" , "green" , "blue"];
+
+// let modified = []; // to store modified colors
+// let modify = 0;
+// for (let i = 0; i < colors.length; i++) {
+//     modify = colors[i] + " is a color name"
+//     modified.push(modify);
+// }
+
+// console.log(modified);
+
+
+
+// using map
+
+// let colors = ["red" , "green" , "blue"];
+// modified = colors.map(function(color) {
+//     return  color + " is a color name"
+// })
+// console.log(modified)
+
+
+// // clean approach
+// let colors = ["red" , "green" , "blue"];
+
+
+// modified = colors.map((color) => color + " is a color name") ;
+// console.log(modified)
+
+// **************************************** 4. use of map ended ****************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// **************************************** 5. use of template litteral ****************************************
+
+// // template literal more clean
+
+// let colors = ["red" , "green" , "blue"];
+
+
+// modified = colors.map((color) => `${color} is a color name`) ;
+// console.log(modified)
+
+// **************************************** 5. use of template litteral ended ****************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// **************************************** 6. difference b/w object and json and iterate them ****************************************
+
+// // iterate over Object 
+// let marks = {
+//     arsal: 34,
+//     ali: 78,
+//     bilal: 99.977
+// }
+
+// JSON language independant data transfer format
+
+// let marks = {
+//     "arsal": 34,
+//     "ali": 78,
+//     "bilal": 99.977
+// }
+
+
+
+// // ES6 same way to access object or json data
+// Object.keys(marks).forEach(key => {
+//     console.log(key + ' - ' + marks[key]) // key - value
+// })
+
+// // ES7
+// Object.entries(marks).forEach(([key, value]) => {
+//     console.log(key + ' - ' + value) // key - value
+// })
+
+
+
+// json to obj , obj to json 
+
+// console.log(marks)
+
+// JSON.stringify(obj) // json to obj
+// JSON.parse(data1) // obj to json
+
+
+
+
+// **************************************** 6. difference b/w object and json and iterate them ended ****************************************
+
+
+
+
+
+
+
+
+
+// **************************************** 7. foreach loop and special type of for loop ****************************************
+
+
+// // for each for array 
+// let animals = ['dog', 'cat', 'hen'];
+// animals.forEach(function(currentValue, index, array) {
+//     // Do something with currentValue or array[index]
+//     console.log("current" + currentValue , "index" + index , "arry" + array)
+//   });
+
+
+
+
+
+
+
+
+
+
+
+// // special types of for loop 
+
+// // for array 
+// let myarray = [2,445,643,6436]
+// for (let value of myarray) {
+//     // do something with value
+//     console.log(value)
+//   }
+
+// myobj = {
+//     name : "kashan",
+//     age : "20"
+
+// }
+// //   for object 
+//   for (let property in myobj) {
+//     // do something with object property
+//     console.log(property)
+//   }
+
+// **************************************** 7. foreach loop and special type of for loop ended ****************************************
+
+
+
+
+
+
+
+// **************************************** 8. use of Spread operator ****************************************
+
+
+// spread operator 
+
+
+// let array1 = ["Apple" , "Mango" , "Banana"];
+// let array2 = ["Tomato" , "Onion" , "Potato"];
+
+// let combinedarray = array1.concat(array2); // here we use a function
+// console.log(combinedarray);
+
+
+
+
+
+
+
+
+
+// // what if i do 
+// let array1 = ["Apple" , "Mango" , "Banana"];
+// let combinedarray = [array1 , "Tomato" , "Onion" , "Potato"];
+
+// console.log(combinedarray); // i got nested array
+
+
+
+
+
+
+
+
+
+
+
+
+// // solution
+
+// let array1 = ["Apple" , "Mango" , "Banana"];
+// let combinedarray = [...array1 , "Tomato" , "Onion" , "Potato"]; // using spread operator
+
+// console.log(combinedarray) 
+
+
+// // or 
+
+// let array1 = ["Apple" , "Mango" , "Banana"];
+// let array2 = ["Tomato" , "Onion" , "Potato"];
+
+// let combinedarray = [...array1 , ...array2] // using spread operator
+
+// console.log(combinedarray)
+
+
+// // with objects
+
+// const personName = {name : "Ali"}
+// const job = {job : "web developer"}
+
+// const combined = {...personName , ...job , Location : "Pakistan"}
+// console.log(combined)
+
+
+
+
+// with function
+
+// lets create simple function to add 3 numbers
+
+// function sum(num1, num2 , num3) {
+//     return num1+ num2 + num3 ;
+// }
+
+
+// console.log(sum(1,2,3))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // If we had an array that we wanted to pass as a list of arguments in a function
+// function sum(num1, num2 , num3) {
+//     return num1+ num2 + num3 ;
+// }
+
+// let params = [1,2,3];
+// console.log(sum(params)) // i got 1,2,3undefinedundefinedd
+
+
+
+
+// // solution spread operator
+// function sum(num1, num2 , num3) {
+//     return num1+ num2 + num3 ;
+// }
+
+// let params = [1,2,3];
+// console.log(sum(...params))
+
+
+
+
+// **************************************** 8. use of Spread operator ended ****************************************
+
+
+
+
+
+
+
+
+
+
+
+
+// **************************************** 9. use of rest operator ****************************************
+
+// rest operator
+// rest parameters collect all the remaining elements into an array
+
+
+// // lets add multiple arguments
+// function add(x, y) {
+//     return x + y;
+//   }
+  
+// console.log(add(1, 2, 3, 4, 5)) // returns 3
+
+// function add(...args) {
+//     let result = 0;
+  
+//     for (let arg of args) result += arg;
+  
+//     return result
+//   }
+  
+// console.log(add(1)) // returns 1
+// console.log(add(1,2)) // returns 3
+// console.log(add(1,2,3,4,5)) // returns 5
+// Note: Rest parameters have to be at the last argument. 
+// This is because it collects all remaining/ excess arguments into an array. 
+
+
+// function abc(a, ...b, c) {
+//     let result = 0;
+  
+//     for (let arg of b) result += arg;
+//     return result + a + c ;
+//   }
+
+// console.log(abc(1,2,3,4,5)) // Uncaught SyntaxError: Rest parameter must be last formal parameter
+// function abc(a, c , ...b) {
+//     let result = 0;
+  
+//     for (let arg of b) result += arg;
+//     return result + a + c;
+//   }
+
+// console.log(abc(1,2,3,4,5)) // Uncaught SyntaxError: Rest parameter must be last formal parameter
+
+
+// // Observe the sequence
+// function xyz(x, y, ...z) {
+//     console.log(x, ' ', y); // A B
+  
+//     console.log(z); // ["C", "D", "E", "F"]
+//     console.log(z[0]); // C
+//     console.log(z.length); // 4
+//   }
+  
+//   xyz("A", "B", "C", "D", "E", "F")
+
+
+
+// // Map operator
+// function xyz(x, y, ...z) {
+
+  
+//     return z.map( (elem) => `${elem} is a letter `)
+
+//   }
+  
+//   console.log(xyz("A", "B", "C", "D", "E", "F"))
+
+// // filter operator
+// function xyz(x, y, ...z) {
+
+  
+//     return z.filter( (elem) => elem == "F" )
+
+//   }
+  
+// console.log(xyz("A", "B", "C", "D", "E", "F"))
+
+
+
+
+
+
+// With rest parameters we can gather any number of arguments into an array 
+// and do what we want with them
+
+
+// The spread operator allows us to expand elements.
+// With rest parameters we were able to get 
+// a list of arguments into an array
+
+
+// ... could be used to represent either a spread operator or
+// a rest parameter. How do we tell the difference? Well it entirely
+//  depends on how we use it. 
+
+
+// **************************************** 9. use of rest operator ended ****************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// **************************************** 10. use of Destructuring ****************************************
+
+
+// Destructuring
+
+// The two most used data structures in JavaScript are Object and Array.
+
+// Objects allow us to create a single entity that stores data items by key.
+// Arrays allow us to gather data items into an ordered list.
+// Although, when we pass those to a function, it may need not an object/array as a whole. It may need individual pieces.
+
+// Destructuring assignment is a special syntax that allows us to “unpack” arrays or objects into a bunch of variables, as sometimes that’s more convenient.
+
+// Destructuring also works great with complex functions that have a lot of parameters, default values, and so on. Soon we’ll see that.
+
+// // we have an array with the name and surname
+// let arr = ["Bilal", "Khan"]
+
+// // destructuring assignment
+
+// // sets firstName = arr[0]
+// // and surname = arr[1]
+
+// let [firstName, surname] = arr;
+// its like 
+// let firstName = arr[0];
+// let surname = arr[1];
+
+// // Now we can work with variables instead of array members.
+// console.log(firstName); // Bilal
+// console.log(surname);  // Khan
+
+
+
+// // with array-returning methods
+
+// let [first, second , third] = "I am a Student".split(' ');
+// console.log(first); // I
+// console.log(second);  // am
+
+
+// Actually, we can use it with any iterable, not only arrays:
+
+// let [a, b, c] = "abc"; // ["a", "b", "c"]
+// let [one, two, three] = new Set([1, 2, 3]);
+
+
+
+// let user = {};
+// [user.name, user.surname] = "Ali sheikh".split(' ');
+
+// console.log(user.name); // Ali
+// console.log(user.surname); // sheikh
+
+
+// // swapping
+// let guest = "Kamran";
+// let admin = "Hasan";
+
+// // Let's swap the values: make guest=Hasan, admin=Kamran
+// [guest, admin] = [admin, guest];
+
+// console.log(`${guest} ${admin}`); // Hasan Kamran (successfully swapped!)
+
+// // Usually, if the array is longer than the list at the left, the “extra” items are omitted.
+// // Further items aren't assigned anywhere
+// let [name1, name2] = ["Ali", "Fazal", "Bilal", "Yasir"];
+
+// console.log(name1); // Ali
+// console.log(name2); // Fazal
+
+
+
+// // with rest operator (because we are collecting like array)
+
+// let [name1, name2, ...rest] = ["Ali", "Fazal", "Bilal", "Yasir" , "Anzal"];
+
+// // rest is array of items, starting from the 3rd one
+// console.log(rest[0]); // Bilal
+// console.log(rest[1]); // Yasir
+// console.log(rest.length); // 3
+
+
+
+// // with javaScript objects
+
+// let options = {
+//     title: "Menu",
+//     width: 100,
+//     height: 200
+//   };
+  
+//   let {title, width, height} = options;
+  
+//   console.log(title);  // Menu
+//   console.log(width);  // 100
+//   console.log(height); // 200
+
+
+
+// **************************************** 10. use of Destructuring ended ****************************************
+    </script>
+</body>
+</html>

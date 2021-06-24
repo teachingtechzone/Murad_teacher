@@ -803,6 +803,369 @@
 
 
 // **************************************** 10. use of Destructuring ended ****************************************
+        
+        
+        // **************************************** 11. JavaScript Callbacks *********************************************
+
+// "I will call back later!"
+
+// A callback is a function passed as an argument to another function
+
+// This technique allows a function to call another function
+
+// A callback function can run after another function has finished
+
+// Function Sequence
+// JavaScript functions are executed in the sequence they are called. Not in the sequence they are defined.
+
+
+// console.log("The following example will end up displaying 'Goodbye'")
+
+// function myFirst() {
+//   console.log("hello")
+// }
+
+// function mySecond() {
+//     console.log("Goodbye")
+// }
+
+// myFirst();
+// mySecond();
+
+
+// console.log("The following example will end up displaying 'Hello'")
+// mySecond();
+// myFirst();
+
+// This example will end up displaying "Goodbye":
+
+
+// Sequence Control
+// Sometimes you would like to have better control over when to execute a function.
+
+// Suppose you want to do a calculation, and then display the result.
+
+// You could call a calculator function (myCalculator), save the result, and then call another function (myDisplayer) to display the result:
+
+
+
+// console.log("The following example will display the sum of 2 numbers")
+
+// function myDisplayer(some) {
+//     console.log(some)
+//   }
+  
+//   function myCalculator(num1, num2) {
+//     let sum = num1 + num2;
+//     return sum;
+//   }
+  
+//   let result = myCalculator(5, 5);
+//   myDisplayer(result);
+
+
+
+
+
+
+
+
+
+
+// Or, you could call a calculator function (myCalculator),
+// and let the calculator function call the display function (myDisplayer):
+// console.log("The following example is for function into function")
+
+// function myDisplayer(some) {
+//     console.log(some);
+//   }
+  
+//   function myCalculator(num1, num2) {
+//     let sum = num1 + num2;
+//     myDisplayer(sum);
+//   }
+  
+//   myCalculator(5, 5);
+
+
+
+
+
+
+
+
+//   The problem with the first example above, is that you have to call two functions to display the result.
+
+//   The problem with the second example, is that you cannot prevent the calculator function from displaying the result.
+  
+//   Now it is time to bring in a callback.
+
+
+
+
+
+
+
+
+
+// NOTE: A callback is a function passed as an argument to another function.
+// console.log("The following example is for callback function")
+
+// function myDisplayer(some) {
+//     console.log(some)
+//   }
+
+//   function myCalculator(num1, num2, myCallback) {
+//     let sum = num1 + num2;
+//     myCallback(sum);
+//   }
+  
+//   myCalculator(5, 5, myDisplayer);
+
+
+// When you pass a function as an argument, remember not to use parenthesis.
+
+// Right: myCalculator(5, 5, myDisplayer);
+
+// Wrong: myCalculator(5, 5, myDisplayer());
+
+// **************************************** 11. JavaScript Callbacks ended ****************************************
+
+
+
+// **************************************** 12. concept of Asynchronous and Synchronous     ******************************************
+
+
+// Synchronous JavaScript: As the name suggests synchronous means to be in a sequence, i.e. every statement of the code
+// gets executed one by one. So, basically a statement has to wait for the earlier statement to get executed.
+
+
+// console.log("first"); // First
+
+// console.log("second") ;// Second
+  
+// console.log("third"); // Third
+
+
+
+
+// Asynchronous JavaScript: Asynchronous code allows the program to be executed parallel 
+// where the synchronous code will block further execution of the remaining code until it finishes 
+// the current one.
+
+
+// console.log("first");
+// console.log("second");
+
+// setTimeout(() => {
+//     console.log("third");
+// }, 0);
+
+// console.log("forth");
+
+// console.log("fifth");
+
+
+
+
+
+// setTimeout(myFunction, 3000); // don't use parenthesis with calback functions
+
+// function myFunction() {
+//   console.log("This is calback function")
+// }
+
+
+// load data from a file
+
+// function myDisplayer(some) {
+//     console.log(some);
+//   }
+  
+//   function getFile(myCallback) {
+//     let req = new XMLHttpRequest();
+//     req.open('GET', "index.html");
+//     req.onload = function() {
+//       if (req.status == 200) {
+//           console.log(this)
+//         myCallback(this.responseText);
+//       } else {
+//         myCallback("Error: " + req.status);
+//       }
+//     }
+//     req.send();
+//   }
+  
+//   getFile(myDisplayer);
+// **************************************** 12. concept of Asynchronous and Synchronous ended ****************************************
+
+
+
+
+// **************************************** 13. Promise  ********************************************
+
+// basic structure
+
+
+// // let myprom = new Promise();
+
+// let myprom = new Promise(function(res,rej) {
+//     if (condition) {
+//         res();
+//     }
+
+//     else{
+//         rej();
+//     }
+// });
+
+// myprom.then("promise fulfilled").catch("promise rejected");
+
+
+
+
+
+
+
+
+
+
+
+
+// let myprom = new Promise( (res,rej) => {
+//     let condition = false;
+//     if (condition) {
+//         res("i got true condition");
+//     }
+
+//     else{
+//         rej("error occured");
+//     }
+// });
+
+// myprom.then( res => {
+//     console.log(res)
+// }).catch(rej => {
+//     console.log(rej)
+// })
+
+
+// // code in then block
+// myprom.then( res => {
+//     console.log("this is then block",res)
+// }).catch(rej => {
+//     console.log("this is catch block",rej)
+// })
+
+// or in separate
+
+// myprom.then(FuncOnres).catch(FuncOnrej)
+
+// function FuncOnres(res) {
+//         console.log("this is then block",res)
+// }
+// function FuncOnrej(rej) {
+//     console.log("this is catch block",rej)
+// }
+
+
+// now consider a senerio
+
+// function DellAvailable() {
+//     return false;
+// }
+
+// function HpAvailable() {
+//   return true;
+// }
+
+
+// let myPromise = new Promise( (res , rej) => {
+//     if(DellAvailable()){
+//         setTimeout(() => {
+//             res("Dell available")
+//         }, 3000);
+//     }
+//     else if (HpAvailable()){
+//         setTimeout(() => {
+//             res("Hp available")
+//         }, 3000);
+        
+//     }
+
+//     else{
+//         rej("laptop not available")
+//     }
+
+// });
+
+
+
+// myPromise.then( res => {
+//     console.log(res)
+// }).catch( (err) => {
+//     console.log(err)
+// }  )
+
+// now extend example
+
+// function DellAvailable() {
+//     return true
+// }
+
+// function HpAvailable() {
+//   return true;
+// }
+
+// let Dell = {
+//     Laptopname : "Dell",
+//     color : "black"
+// }
+// let Hp = {
+//     Laptopname : "Hp",
+//     color : "Silver"
+// }
+// let Nothing = {
+//     NotFound : "No laptop found"
+// }
+
+
+// let myPromise = new Promise( (res , rej) => {
+//     if(DellAvailable()){
+//         setTimeout(() => {
+//             res(Dell)
+//         }, 2000);
+//     }
+//     else if (HpAvailable()){
+//         setTimeout(() => {
+//             res(Hp)
+//         }, 1000);
+        
+//     }
+
+//     else{
+//         rej(Nothing)
+//     }
+
+// });
+
+
+
+// myPromise.then( res => {
+//     console.log(res)
+// }).catch( (err) => {
+//     console.log(err)
+// }  )
+// **************************************** 13. Promise ended ****************************************
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>

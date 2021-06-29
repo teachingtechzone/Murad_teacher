@@ -1163,6 +1163,269 @@
 
 
 
+// **************************************** 14. Using Promise with XHR object *************************
+
+// mypromise = new Promise( (res , rej) => {
+
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("GET" , "https://jsonplaceolder.typicode.com/posts");
+//     xhr.onload = function () {
+//         if(xhr.status == 200){
+//             res(xhr.response);
+//         }
+//         else{
+//             rej(xhr.statusText);
+//         }
+//     }
+
+//       xhr.onerror = function() {
+//         rej("Network Error");
+//       };
+
+//       xhr.send();
+
+// });
+
+// console.log("befor console");
+
+// mypromise.then( (result) => {
+//     console.log("then block => " , result);
+// }).catch( (err) => {
+//     console.log("Error block => " , err);
+// })
+// console.log("after console");
+
+
+// using function
+
+// function get(url) {
+//     // Return a new promise.
+//     return new Promise(function(resolve, reject) {
+//       // Do the usual XHR stuff
+//       var xhr = new XMLHttpRequest();
+//       xhr.open('GET', url);
+  
+//       xhr.onload = function() {
+//         // This is called even on 404 etc
+//         // so check the status
+//         if (xhr.status == 200) {
+//           // Resolve the promise with the response text
+//           resolve(xhr.response);
+//         }
+//         else {
+//           // Otherwise reject with the status text
+//           // which will hopefully be a meaningful error
+//           reject(xhr.statusText);
+//         }
+//       };
+  
+//       // Handle network errors
+//       xhr.onerror = function() {
+//         reject("Network Error");
+//       };
+  
+//       // Make the request
+//       xhr.send();
+//     });
+//   }
+  
+// //   // Use it!
+//   get('https://jsonplaceholder.typicode.com/posts').then( (response) => {
+//     console.log("Success!", response);
+// }).catch( (err)=> {
+//       console.log("Error! ", err);
+
+//   })
+
+
+
+// **************************************** 14. Using Promise with XHR object Ended *************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// **************************************** 15. Using Async await  ******************************************
+
+// // async await simplifies promises
+
+
+// function CheckCompany(company) {
+//     return new Promise( ( resolve , reject) => {
+//         console.log("checking company");
+//         if(company == "google"){
+//             resolve("google is popular search engine")
+//         }
+//         else{
+//             reject("This is not popular")
+//         }
+//     })
+// }
+
+// function extra(PrevRes) {
+//     return new Promise( (resolve , reject ) => {
+//         resolve(`Extra info - ${PrevRes}`);
+//     })
+    
+// }
+
+// CheckCompany('google').then( (res) => {
+//     console.log("Then block => " , res);
+//     return extra(res)
+// }).then( res => {
+//     console.log(`inner then => ${res}`)
+// }).catch( (err ) => {
+//     console.log(`error => ${err}`)
+// })
+
+
+// // now simplifing using async await
+
+// async function DoTheSearch() {
+//     console.log("before first promise");
+//     const firstPromise = await CheckCompany("google");
+//     console.log(firstPromise);
+//     console.log("after first promise");
+//     const secondPromise = await extra(firstPromise);
+//     console.log("after second promise");
+//     console.log(secondPromise);
+
+// }
+// console.log("before dothesearch")
+// DoTheSearch();
+// console.log("after dothesearch")
+
+
+// // catching error
+// async function DoTheSearch() {
+//     try {
+//         console.log("before first promise");
+//         const firstPromise = await CheckCompany("google");
+//         console.log(firstPromise);
+//         console.log("after first promise");
+//         const secondPromise = await extra(firstPromise);
+//         console.log("after second promise");
+//         console.log(secondPromise);
+//     } catch (error) {
+//         console.log(`error occured ${error}`)
+//     }
+
+// }
+// console.log("before dothesearch")
+// DoTheSearch();
+// console.log("after dothesearch")
+
+// **************************************** 15. Using Async await Ended **************************************
+
+
+
+
+
+
+
+// **************************************** 16. Using fetch api with promise     ******************************************
+// // fetch api using promise
+// fetch('https://jsonplaceholder.typicode.com/users')
+//   .then(response => response.json())
+//   .then(json => console.log(json))
+//   .catch( (err) => {
+//       console.log(`Error Occured => ${err}`)
+//   })
+
+
+
+// // catch will not grap network error so do the following check
+// fetch('https://jsonplaceholder.typicode.com/users1')
+//   .then(response => {
+//        return response.json();
+//     }
+//     )
+//   .then(json => console.log(json))
+//   .catch( (err) => {
+//       console.log(`Error Occured => ${err}`)
+//   })
+
+
+
+
+// // // now we will get the network error
+// fetch('https://jsonplaceholder.typicode.com/users1')
+//   .then(response => {
+//        if(response.ok){
+//         return response.json();
+//        }
+//        else{
+//         //    return response;
+//            return "network error";
+//        }
+//     }
+//     )
+//   .then(json => console.log(json))
+//   .catch( (err) => {
+//       console.log(`Error Occured => ${err}`)
+//   })
+
+// **************************************** 16. Using fetch api with promise Ended **************************************
+
+
+
+
+
+
+
+
+// **************************************** 17. Using fetch api with async await  **************************************
+
+
+
+
+// // fetch api using async await
+
+// async function Myfunc() {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/users");
+//     const users = response.json();
+//     return users;
+// }
+
+// Myfunc().then(res => {
+//     console.log(res)
+// }).catch(err => {
+//     console.log(`err ${err}`)
+// })
+
+
+
+// // handling error
+// async function Myfunc() {
+    
+//     const response = await fetch("https://jsonplaceholder.typicode.com/users1");
+
+//     if(response.ok){
+//         return users = response.json();
+//     }
+
+//     return "network error";
+// }
+
+// Myfunc().then(res => {
+//     console.log(res)
+// }).catch(err => {
+//     console.log(`err ${err}`)
+// })
+
+
+// **************************************** 17. Using fetch api with async await Ended **************************************
+
 
 
 

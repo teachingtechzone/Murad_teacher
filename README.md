@@ -1,3 +1,6 @@
+Advaced javascript started on 15th june
+Ended on 6th of july
+
 1. React Introduction
 2. React using CDN
     ```
